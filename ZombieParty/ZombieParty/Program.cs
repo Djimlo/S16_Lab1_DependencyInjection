@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ZombieParty.Models.Data;
+using ZombieParty.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<ZombiePartyDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies()
 );
 
+builder.Services.AddSingleton<IImageFileManager, ImageFileManager>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
