@@ -10,14 +10,14 @@ namespace ZombieParty.Controllers
     public class ZombieController : Controller
     {
         private ZombiePartyDbContext context;
-        private readonly IImageFileManager imageFileManager;
+        //private readonly IImageFileManager imageFileManager;
 
         //private readonly IWebHostEnvironment webHostEnvironment;
 
-        public ZombieController(ZombiePartyDbContext context, IImageFileManager imageFileManager /*IWebHostEnvironment webHostEnvironment*/)
+        public ZombieController(ZombiePartyDbContext context /*IImageFileManager imageFileManager*/ /*IWebHostEnvironment webHostEnvironment*/)
         {
             this.context = context;
-            this.imageFileManager = imageFileManager;
+            //this.imageFileManager = imageFileManager;
             //this.webHostEnvironment = webHostEnvironment;
         }
 
@@ -48,7 +48,7 @@ namespace ZombieParty.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upsert(Zombie zombie)
+        public async Task<IActionResult> Upsert([FromServices] IImageFileManager imageFileManager, Zombie zombie)
         {
             if (ModelState.IsValid)
             {
